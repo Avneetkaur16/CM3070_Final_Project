@@ -4,5 +4,3 @@ IMAGE_PREPROCESSORS = {
     'baseline_preprocessor': baseline_preprocessing,
     'grayscale_preprocessor': grayscale_preprocessing
 }
-
-selected_preprocessor = 'baseline_preprocessor'

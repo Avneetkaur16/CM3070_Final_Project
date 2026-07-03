@@ -1,15 +1,14 @@
-from tensorflow.keras import layers
+from tensorflow.keras import layers, Sequential
 
-# Data augmentation layers
-random_flipping_layer = layers.RandomFlip('horizontal_and_vertical')
-random_rotations_layer = layers.RandomRotation(0.0138) # +- 5 degrees
-random_zoom_layer = layers.RandomZoom(0.05)
-random_contrast_layer = layers.RandomContrast(0.05)
+# Data Augmentation layers
+data_augmentation = Sequential([
+    layers.RandomFlip('horizontal_and_vertical'),
+    layers.RandomRotation(0.0138), # +- 5 degrees
+    layers.RandomZoom(0.05),
+    layers.RandomContrast(0.05)
+])
 
-# Data augmentation function for training data
-def data_augmentation(image_tensor, label_tensor):
-  image_tensor = random_flipping_layer(image_tensor)
-  image_tensor = random_rotations_layer(image_tensor)
-  image_tensor = random_zoom_layer(image_tensor)
-  image_tensor = random_contrast_layer(image_tensor)
-  return image_tensor, label_tensor
+# Data augmentation method
+def add_data_augmentation(image_tensor):
+    augmented_image = data_augmentation(image_tensor, training=True)
+    return augmented_image
