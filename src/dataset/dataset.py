@@ -11,7 +11,7 @@ def load_and_preprocess_images(image_path_tensor, preprocessor):
   return image_tensor
 
 # Generate a tf.data dataset using a dataframe
-def generate_dataset(df, batch_size, preprocessor, training=False):
+def generate_dataset(df, batch_size, preprocessor, model_type, training=False):
   image_paths = df['new_image_path'].values
   pathologies = df['pathology'].values
 
@@ -24,6 +24,14 @@ def generate_dataset(df, batch_size, preprocessor, training=False):
   # Data augmentation
   if(training):
     dataset = dataset.map(lambda x, y: (add_data_augmentation(x), y), num_parallel_calls=tf.data.AUTOTUNE)
+
+  if(model_type == 'vgg16'):
+    # VGG16 specific image preprocessing (RGB -> BGR)
+    dataset = dataset.map(lambda x, y: (tf.keras.applications.vgg16.preprocess_input(x), y), num_parallel_calls=tf.data.AUTOTUNE)
+
+  elif(model_type == 'resnet50'):
+    # ResNet50 specific image preprocessing (RGB -> BGR)
+    dataset = dataset.map(lambda x, y: (tf.keras.applications.resnet50.preprocess_input(x), y), num_parallel_calls=tf.data.AUTOTUNE)
 
   dataset = dataset.shuffle(buffer_size=len(df))
 
