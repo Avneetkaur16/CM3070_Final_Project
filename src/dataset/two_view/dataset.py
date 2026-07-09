@@ -1,5 +1,5 @@
 import tensorflow as tf
-from data_augmentation import data_augmentation
+from data_augmentation import add_data_augmentation_two_view
 
 # Merge CC and MLO views of each patient
 def merge_views_by_patient(df):
@@ -25,12 +25,6 @@ def load_and_preprocess_images_two_view(image_paths_tensor, preprocessor):
   mlo_image_tensor.set_shape((224, 224, 3))
 
   return (cc_image_tensor, mlo_image_tensor)
-
-# Data augmentation function for CC and MLO views
-def add_data_augmentation_two_view(image_tensors):
-  cc_augmented_image = data_augmentation(image_tensors[0], training=True)
-  mlo_augmented_image = data_augmentation(image_tensors[1], training=True)
-  return (cc_augmented_image, mlo_augmented_image)
 
 # VGG16 Preprocessing for CC and MLO views separately
 def vgg16_preprocess_two_view(image_tensors):

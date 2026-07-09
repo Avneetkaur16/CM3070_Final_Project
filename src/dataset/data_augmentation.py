@@ -12,3 +12,9 @@ data_augmentation = Sequential([
 def add_data_augmentation(image_tensor):
     augmented_image = data_augmentation(image_tensor, training=True)
     return augmented_image
+
+# Data augmentation function for CC and MLO views for two-view training 
+def add_data_augmentation_two_view(image_tensors):
+  cc_augmented_image = data_augmentation(image_tensors[0], training=True)
+  mlo_augmented_image = data_augmentation(image_tensors[1], training=True)
+  return (cc_augmented_image, mlo_augmented_image)
