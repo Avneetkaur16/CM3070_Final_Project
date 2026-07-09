@@ -19,7 +19,7 @@ def create_resnet50_two_view_model(input_shape=(224, 224, 3)):
 
   # Layers for processing concatenated features
   x = layers.Dense(128, activation='relu')(features_combined)
-  x = layers.Dropout(0.2)(x)
+  x = layers.Dropout(0.3)(x)
   output = layers.Dense(1, activation='sigmoid')(x)
 
   # Model with two inputs (CC views, MLO views) and one output (pathology label)
