@@ -8,7 +8,7 @@ def create_resnet50_model():
   input = layers.Input(shape=(224, 224, 3))
   x = resnet50(input, training=False)
   x = layers.GlobalAveragePooling2D()(x)
-  x = layers.Dropout(0.2)(x)
+  x = layers.Dropout(0.3)(x)
   output = layers.Dense(1, activation='sigmoid')(x)
 
   model = Model(inputs=input, outputs=output)

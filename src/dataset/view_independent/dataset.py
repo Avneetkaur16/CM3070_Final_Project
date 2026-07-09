@@ -1,6 +1,7 @@
 import tensorflow as tf
 from data_augmentation import add_data_augmentation
 
+# Load and preprocess image path tensors using the selected preprocessor function for a given image path
 def load_and_preprocess_images(image_path_tensor, preprocessor):
   # tf.numpy_function converts image_path_tensor to numpy object which is used by image preprocessing function (wrapper) and the processed resulting image
   # is converted back to an image tensor of float32
