@@ -1,5 +1,5 @@
 import tensorflow as tf
-from data_augmentation import add_data_augmentation
+from src.dataset.data_augmentation import add_data_augmentation
 
 # Load and preprocess image path tensors using the selected preprocessor function for a given image path
 def load_and_preprocess_images(image_path_tensor, preprocessor):

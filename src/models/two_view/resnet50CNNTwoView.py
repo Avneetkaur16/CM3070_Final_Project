@@ -1,5 +1,5 @@
 from tensorflow.keras import layers, Model
-from view_independent.resnet50CNN import create_resnet50_model
+from src.models.view_independent.resnet50CNN import create_resnet50_model
 
 def create_resnet50_two_view_model(input_shape=(224, 224, 3)):
   # Create two input layers for CC and MLO views

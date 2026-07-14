@@ -1,5 +1,5 @@
 import cv2
-from .image_functions import resize_image, normalize_image, grayscale_image, clahe_image, gamma_correct_image, median_blur_image
+from src.image_preprocessing.image_functions import resize_image, normalize_image, grayscale_image, clahe_image, gamma_correct_image, median_blur_image
 
 # Baseline image preprocessing
 def baseline_preprocessing(image_path):
