@@ -1,5 +1,5 @@
 from tensorflow.keras import layers, Model
-from view_independent.customCNN import create_custom_cnn_model
+from src.models.view_independent.customCNN import create_custom_cnn_model
 
 def create_custom_cnn_two_view_model(input_shape=(224, 224, 3)):
   # Create two input layers for CC and MLO views

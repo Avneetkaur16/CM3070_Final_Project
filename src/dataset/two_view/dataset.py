@@ -1,5 +1,5 @@
 import tensorflow as tf
-from data_augmentation import add_data_augmentation_two_view
+from src.dataset.data_augmentation import add_data_augmentation_two_view
 
 # Merge CC and MLO views of each patient
 def merge_views_by_patient(df):

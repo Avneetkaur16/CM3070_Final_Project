@@ -1,5 +1,5 @@
 from tensorflow.keras import layers, Model
-from view_independent.vgg16CNN import create_vgg16_model
+from src.models.view_independent.vgg16CNN import create_vgg16_model
 
 def create_vgg16_two_view_model(input_shape=(224, 224, 3)):
   # Create two input layers for CC and MLO views
