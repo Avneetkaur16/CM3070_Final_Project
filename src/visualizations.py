@@ -1,8 +1,10 @@
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, precision_recall_curve
+
+# PERFROMANCE METRIC GRAPHS
 
 # Function to plot training-validation loss for a given model
-def plot_training_validation_loss(history, model_name):
+def plot_training_validation_loss(history, model_name, preprocessor):
   model_history = history.history
   training_loss = model_history['loss']
   validation_loss = model_history['val_loss']
@@ -10,7 +12,7 @@ def plot_training_validation_loss(history, model_name):
 
   plt.plot(epochs, training_loss, label='Training Loss')
   plt.plot(epochs, validation_loss, label='Validation Loss')
-  plt.title(f"{model_name}: Training and Validation Loss Curve")
+  plt.title(f"{model_name} with {preprocessor}: Training and Validation Loss Curve")
   plt.xlabel('Epochs')
   plt.ylabel('Loss')
   plt.legend()
@@ -32,19 +34,15 @@ def plot_training_validation_accuracy(history, model_name, preprocessor):
   plt.show()
 
 # Function to plot precision-recall curve for a given model
-def plot_precision_recall_curve(history, model_name, preprocessor):
-  model_history = history.history
-  precision = model_history['precision']
-  recall = model_history['recall']
-  epochs = range(1, len(precision) + 1)
+def plot_precision_recall_curve(true_pathology, pred_pathology, model_name, preprocessor):
+  precision, recall, thresholds = precision_recall_curve(true_pathology, pred_pathology)
 
-  plt.plot(epochs, precision, label='Precision')
-  plt.plot(epochs, recall, label='Recall')
+  plt.plot(recall, precision)
+  plt.xlabel('Recall')
+  plt.ylabel('Precision')
   plt.title(f"{model_name} with {preprocessor}: Precision-Recall Curve")
-  plt.xlabel('Epochs')
-  plt.ylabel('Precision/Recall')
-  plt.legend()
   plt.show()
+
 
 # Confusion matrix for a given model
 def plot_confusion_matrix(true_pathology, predicted_pathology, model_name, preprocessor):
@@ -54,18 +52,17 @@ def plot_confusion_matrix(true_pathology, predicted_pathology, model_name, prepr
   plt.title(f"{model_name} with {preprocessor}: Confusion Matrix")
   plt.show()
 
+
+# COMPUTATIONAL COSTS GRAPHS
+
 # Bar chart for performance metrics for a given model
-def plot_metrics_bar_chart(true_pathology, predicted_pathology, eval_metrics, model_name, preprocessor):
+def plot_metrics_bar_chart(eval_metrics, model_name, preprocessor):
   auc = eval_metrics['auc']
   sensitivity = eval_metrics['recall']
   precision = eval_metrics['precision']
-  f1 = 0.0
-  if(not (precision == 0.0 and sensitivity == 0.0)):
-    f1 = 2 * (precision * sensitivity) / (precision + sensitivity)
+  f1 = eval_metrics['f1_score']
   accuracy = eval_metrics['accuracy']
-
-  tn, fp, fn, tp = confusion_matrix(true_pathology, predicted_pathology).ravel()
-  specificity = tn / (tn + fp)
+  specificity = eval_metrics['specificity']
 
   metrics = ['AUC', 'Sensitivity', 'Specificity', 'Precision', 'F1 Score', 'Accuracy']
   metric_values = [auc, sensitivity, specificity, precision, f1, accuracy]
@@ -80,9 +77,6 @@ def plot_metrics_bar_chart(true_pathology, predicted_pathology, eval_metrics, mo
 def plot_training_time(training_times, model_name):
   models = list(training_times.keys())
   training_time_values = list(training_times.values())
-
-  for i in range(len(training_time_values)):
-    training_time_values[i] = training_time_values[i] / 60.0
 
   plt.barh(models, training_time_values)
   plt.title(f"Training times for pipelines in {model_name}")
