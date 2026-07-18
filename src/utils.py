@@ -17,18 +17,18 @@ def update_image_path_testing(image_path):
 def generate_results_df(model_name, view, pipeline, eval_metrics, specificity, f1, 
                         training_time, prediction_time, peak_memory, model_params):
   results = pd.DataFrame({
-    'model': model_name,
-    'view': view,
-    'image_preprocessing_pipeline': pipeline,
-    'accuracy': eval_metrics['accuracy'],
-    'auc': eval_metrics['auc'],
-    'sensitivity': eval_metrics['recall'],
-    'specificity': specificity,
-    'f1_score': f1,
-    'training_time_mins': training_time / 60.0,
-    'prediction_time_sec': prediction_time,
-    'peak_memory_used_MB': peak_memory / (1024**2),
-    'parameters': model_params
+    'model': [model_name],
+    'view': [view],
+    'image_preprocessing_pipeline': [pipeline],
+    'accuracy': [eval_metrics['accuracy']],
+    'auc': [eval_metrics['auc']],
+    'sensitivity': [eval_metrics['recall']],
+    'specificity': [specificity],
+    'f1_score': [f1],
+    'training_time_mins': [training_time / 60.0],
+    'prediction_time_sec': [prediction_time],
+    'peak_memory_used_MB': [peak_memory / (1024**2)],
+    'parameters': [model_params]
   })
 
   return results
