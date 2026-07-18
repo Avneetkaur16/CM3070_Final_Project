@@ -51,9 +51,9 @@ def store_image_experiment_results(results_file_path, results_df):
 # Function to generate a results data dataframe containing true pathologies, prediction probabilities and prediction pathologies
 def generate_results_data_df(model_name, view, pipeline, true_pathologies, prediction_probs, pred_pathologies):
   results_data = pd.DataFrame({
-    'model': model_name,
-    'view': view,
-    'image_preprocessing_pipeline': pipeline,
+    'model': [model_name],
+    'view': [view],
+    'image_preprocessing_pipeline': [pipeline],
     'true_pathologies': true_pathologies,
     'prediction_probs': prediction_probs,
     'pred_pathology': pred_pathologies
