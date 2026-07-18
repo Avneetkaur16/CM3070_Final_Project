@@ -55,8 +55,8 @@ def generate_results_data_df(model_name, view, pipeline, true_pathologies, predi
     'view': [view],
     'image_preprocessing_pipeline': [pipeline],
     'true_pathologies': true_pathologies,
-    'prediction_probs': prediction_probs,
-    'pred_pathology': pred_pathologies
+    'prediction_probs': prediction_probs.ravel(),
+    'pred_pathology': pred_pathologies.ravel()
   })
 
   return results_data
