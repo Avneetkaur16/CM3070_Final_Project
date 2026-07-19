@@ -47,30 +47,3 @@ def store_image_experiment_results(results_file_path, results_df):
   # Store the updated dataframe in a csv stored in drive
   image_preprocessing_results.to_csv(results_file_path, index=False)
   print(f"Stored results for {results_df['image_preprocessing_pipeline']} pipeline")
-
-# Function to generate a results data dataframe containing true pathologies, prediction probabilities and prediction pathologies
-def generate_results_data_df(model_name, view, pipeline, true_pathology, pred_pathology):
-  results_data = pd.DataFrame({
-    'model': [model_name],
-    'view': [view],
-    'image_preprocessing_pipeline': [pipeline],
-    'true_pathology': [true_pathology],
-    'pred_pathology': [pred_pathology.ravel()]
-  })
-
-  return results_data
-
-# Function to store image preprocessing experimental results data in csv file in the google drive
-def store_image_preprocessing_results_data(results_data_file_path, results_data_df):
-  # Store the results data in the image preprocessing results data dataframe
-  if not os.path.isfile(results_data_file_path):
-    # First instance of results data
-    image_preprocessing_results_data = results_data_df
-  else:  
-    # Append to the existing results data if this is not the first instance
-    image_preprocessing_results_data = pd.read_csv(results_data_file_path)
-    image_preprocessing_results_data = pd.concat([image_preprocessing_results_data, results_data_df], ignore_index=True)
-
-  # Store the updated dataframe in a csv stored in drive
-  image_preprocessing_results_data.to_csv(results_data_file_path, index=False)
-  print(f"Stored results for {results_data_df['image_preprocessing_pipeline']} pipeline")
