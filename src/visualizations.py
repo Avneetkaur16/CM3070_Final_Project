@@ -53,7 +53,6 @@ def plot_confusion_matrix(true_pathology, predicted_pathology, model_name, prepr
   cm_disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['BENIGN', 'MALIGNANT'])
   cm_disp.plot(cmap=plt.cm.Purples)
 
-  plt.figure(figsize=(3, 3))
   plt.title(f"{model_name} with {preprocessor}: Confusion Matrix")
   plt.show()
 
