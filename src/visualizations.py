@@ -10,6 +10,7 @@ def plot_training_validation_loss(history, model_name, preprocessor):
   validation_loss = model_history['val_loss']
   epochs = range(1, len(training_loss) + 1)
 
+  plt.figure(figsize=(5, 5))
   plt.plot(epochs, training_loss, label='Training Loss')
   plt.plot(epochs, validation_loss, label='Validation Loss')
   plt.title(f"{model_name} with {preprocessor}: Training and Validation Loss Curve")
@@ -25,6 +26,7 @@ def plot_training_validation_accuracy(history, model_name, preprocessor):
   validation_accuracy = model_history['val_accuracy']
   epochs = range(1, len(training_accuracy) + 1)
 
+  plt.figure(figsize=(5, 5))
   plt.plot(epochs, training_accuracy, label='Training Accuracy')
   plt.plot(epochs, validation_accuracy, label='Validation Accuracy')
   plt.title(f"{model_name} with {preprocessor}: Training and Validation Accuracy Curve")
@@ -37,6 +39,7 @@ def plot_training_validation_accuracy(history, model_name, preprocessor):
 def plot_precision_recall_curve(true_pathology, pred_pathology, model_name, preprocessor):
   precision, recall, thresholds = precision_recall_curve(true_pathology, pred_pathology)
 
+  plt.figure(figsize=(3, 3))
   plt.plot(recall, precision)
   plt.xlabel('Recall')
   plt.ylabel('Precision')
@@ -49,6 +52,8 @@ def plot_confusion_matrix(true_pathology, predicted_pathology, model_name, prepr
   cm = confusion_matrix(true_pathology, predicted_pathology)
   cm_disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['BENIGN', 'MALIGNANT'])
   cm_disp.plot(cmap=plt.cm.Purples)
+
+  plt.figure(figsize=(3, 3))
   plt.title(f"{model_name} with {preprocessor}: Confusion Matrix")
   plt.show()
 
