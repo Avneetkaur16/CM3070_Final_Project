@@ -23,6 +23,7 @@ def generate_results_df(model_name, view, pipeline, eval_metrics, specificity, f
     'accuracy': [eval_metrics['accuracy']],
     'auc': [eval_metrics['auc']],
     'sensitivity': [eval_metrics['recall']],
+    'precision': [eval_metrics['precision']],
     'specificity': [specificity],
     'f1_score': [f1],
     'training_time_mins': [training_time / 60.0],
