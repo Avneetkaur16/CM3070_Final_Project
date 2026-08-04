@@ -34,7 +34,8 @@ def generate_dataset(df, batch_size, preprocessor, model_type, training=False):
     # ResNet50 specific image preprocessing (RGB -> BGR)
     dataset = dataset.map(lambda x, y: (tf.keras.applications.resnet50.preprocess_input(x), y), num_parallel_calls=tf.data.AUTOTUNE)
 
-  dataset = dataset.shuffle(buffer_size=len(df))
+  if(training):
+    dataset = dataset.shuffle(buffer_size=len(df))
 
   dataset = dataset.batch(batch_size)
   dataset = dataset.prefetch(tf.data.AUTOTUNE)
