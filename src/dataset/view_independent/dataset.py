@@ -23,8 +23,8 @@ def generate_dataset(df, batch_size, preprocessor, model_type, training=False):
   dataset = dataset.map(lambda x, y: (load_and_preprocess_images(x, preprocessor), y) , num_parallel_calls=tf.data.AUTOTUNE)
 
   # Data augmentation
-  #if(training):
-    #dataset = dataset.map(lambda x, y: (add_data_augmentation(x), y), num_parallel_calls=tf.data.AUTOTUNE)
+  if(training):
+    dataset = dataset.map(lambda x, y: (add_data_augmentation(x), y), num_parallel_calls=tf.data.AUTOTUNE)
 
   if(model_type == 'vgg16'):
     # VGG16 specific image preprocessing (RGB -> BGR)
