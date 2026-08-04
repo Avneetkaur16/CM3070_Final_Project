@@ -7,7 +7,7 @@ def baseline_preprocessing(image_path):
   # Read, resize and normalize image
   image = cv2.imread(image_path)
   image = resize_image(image)
-  #image = normalize_image(image)
+  image = normalize_image(image)
   image = image.astype(np.float32)
   return image
 
