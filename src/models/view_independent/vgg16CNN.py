@@ -8,6 +8,7 @@ def create_vgg16_model():
   input = layers.Input(shape=(224, 224, 3))
   x = vgg16(input, training=False)
   x = layers.GlobalAveragePooling2D()(x)
+  x = layers.Dense(256, activation='relu')(x)
   x = layers.Dropout(0.3)(x)
   output = layers.Dense(1, activation='sigmoid')(x)
 
