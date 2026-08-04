@@ -9,7 +9,7 @@ def create_efficientnetb0_model():
   x = efficientnetb0(input, training=False)
   x = layers.GlobalAveragePooling2D()(x)
   x = layers.Dense(256, activation='relu')(x)
-  x = layers.Dropout(0.3)(x)
+  #x = layers.Dropout(0.3)(x)
   output = layers.Dense(1, activation='sigmoid')(x)
 
   model = Model(inputs=input, outputs=output)
