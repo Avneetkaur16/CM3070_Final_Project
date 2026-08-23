@@ -10,7 +10,7 @@ def create_resnet50_model():
   resnet50.trainable = False
 
   # Input layer
-  input = layers.Input(shape=(224, 224, 3))
+  input = layers.Input(shape=(224, 224, 3), name="input")
 
   # ResNet50-specific image preprocessing
   x = tf.keras.applications.resnet50.preprocess_input(input)
@@ -19,10 +19,10 @@ def create_resnet50_model():
   x = resnet50(input, training=False)
 
   # Classification
-  x = layers.GlobalAveragePooling2D()(x)
-  x = layers.Dense(256, activation='relu')(x)
-  x = layers.Dropout(0.3)(x)
-  output = layers.Dense(1, activation='sigmoid')(x)
+  x = layers.GlobalAveragePooling2D(name="global_average_pooling")(x)
+  x = layers.Dense(256, activation="relu", name="dense256")(x)
+  x = layers.Dropout(0.3, name="dropout")(x)
+  output = layers.Dense(1, name="dense1")(x)
 
   model = Model(inputs=input, outputs=output)
   return model

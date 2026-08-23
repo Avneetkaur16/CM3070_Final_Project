@@ -1,7 +1,9 @@
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, precision_recall_curve
 
-# PERFROMANCE METRIC GRAPHS
+# Function to plot the scores of the given metric for all models trained with each image preprocessing
+def plot_image_preprocessing_results(metric_name, all_model_metric_scores):
+  pass
 
 # Function to plot training-validation loss for a given model
 def plot_training_validation_loss(history, model_name, preprocessor):
