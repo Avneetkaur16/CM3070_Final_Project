@@ -23,5 +23,20 @@ def clahe_image(image):
 def median_blur_image(image):
   # Apply median blur on the image with kernel 3 x 3
   median_blurred_image = cv2.medianBlur(image, 3)
-
   return median_blurred_image
+
+# Histogram Equalization technique
+def histogram_equalization_image(image):
+  # Convert BGR image to 1-channel Grayscale
+  gray_image_1_channel = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+  # Apply histogram equalization to the grascaled image
+  histogram_equalized = cv2.equalizeHist(gray_image_1_channel)
+
+  return histogram_equalized
+
+# Gaussian Blur technique
+def gaussian_blur_image(image):
+  # Apply Gaussian blur on the image with kernel 3x3
+  gauss_blurred_image = cv2.GaussianBlur(image, (3, 3), 0)
+  return gauss_blurred_image
