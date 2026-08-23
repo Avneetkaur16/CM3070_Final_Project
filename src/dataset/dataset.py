@@ -1,3 +1,4 @@
+import numpy as np
 import tensorflow as tf
 from src.dataset.data_augmentation import add_data_augmentation
 
@@ -13,6 +14,7 @@ def load_and_preprocess_images(image_path_tensor, preprocessor, model_type):
 
 # Generate a tf.data dataset using a dataframe
 def generate_dataset(df, batch_size, preprocessor, model_type, training=False):
+  # Extract image paths and pathologies from the dataframe
   image_paths = df['new_image_path'].values
   pathologies = df['pathology'].values
 
