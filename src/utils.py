@@ -1,5 +1,19 @@
 import os
 import pandas as pd
+import tensorflow as tf
+
+# CNN model compiler function
+def compile_model(model):
+  model.compile(
+    optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001), 
+    loss=tf.keras.losses.BinaryCrossentropy(from_logits=True), 
+    metrics=[
+    'accuracy',
+    tf.keras.metrics.Precision(name='precision'),
+    tf.keras.metrics.Recall(name='recall'),
+    tf.keras.metrics.AUC(name='auc')
+  ])
+  return model
 
 # Function to update root image path of training images
 def update_image_path_training(image_path):
