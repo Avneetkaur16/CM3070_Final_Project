@@ -20,7 +20,7 @@ def shuffle_training_dataset(dataset, df):
 
 # Adds data augmentation to the images of the dataset provided (For Training set only)
 def data_augmented_dataset(dataset):
-  augmented_data = dataset.map(lambda x, y: (add_data_augmentation(x), y), num_parallel_Calls=tf.data.AUTOTUNE)
+  augmented_data = dataset.map(lambda x, y: (add_data_augmentation(x), y), num_parallel_calls=tf.data.AUTOTUNE)
   return augmented_data
 
 # Batch the dataset based on the batch size
