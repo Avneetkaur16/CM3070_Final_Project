@@ -13,8 +13,7 @@ def load_and_preprocess_images(image_path_tensor, preprocessor):
   return image_tensor
 
 # Shuffled the training dataset based on the buffer size = length of the dataframe (For training set only)
-def shuffle_training_dataset(dataset, df):
-  buffer_size = len(df)
+def shuffle_training_dataset(dataset, buffer_size):
   shuffled_dataset = dataset.shuffle(buffer_size)
   return shuffled_dataset
 
@@ -43,13 +42,7 @@ def generate_dataset(df, preprocessor):
 
   return dataset
 
-def generate_class_weight_dict(df):
-  # Total no. of samples in the dataframe
-  total_samples = len(df)
-
-  # No. of unique classes in the dataset (binary classification = 2 classes)
-  classes = 2
-
+def generate_class_weight_dict(df, classes, total_samples):
   # Count the no. of samples with 0.0 and 1.0 pathologies
   samples_count_0 = len(df[df['pathology'] == 0.0])
   samples_count_1 = len(df[df['pathology'] == 1.0])
