@@ -33,6 +33,9 @@ def histogram_equalization_image(image):
   # Apply histogram equalization to the grascaled image
   histogram_equalized = cv2.equalizeHist(gray_image_1_channel)
 
+  # Convert 1 channel Histogram Equalized image to 3 channel image
+  histogram_equalized = cv2.cvtColor(histogram_equalized, cv2.COLOR_GRAY2BGR)
+
   return histogram_equalized
 
 # Gaussian Blur technique
