@@ -2,7 +2,7 @@ import tensorflow as tf
 from tensorflow.keras import layers, Model
 from tensorflow.keras.applications import MobileNetV2
 
-def create_densenet121_model():
+def create_mobilenetv2_model():
     # Load the MobileNetV2 model with ImageNet weights
     mobilenetv2 = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
 
