@@ -56,6 +56,18 @@ def store_image_experiment_results(results_file_path, results_df):
   image_preprocessing_results.to_csv(results_file_path, index=False)
   print(f"Stored results for {results_df['image_preprocessing_pipeline']} pipeline")
 
+# Function to compute f1 score from precision and recall
+def compute_f1_score(precision, recall):
+  f1_score = 0.0
+
+  if(precision + recall != 0.0):
+    f1_score = (2 * (precision * recall)) / (precision + recall)
+
+  return f1_score
+
+# Function to compute specificity using true negatives and false positives
+def compute_specificity(tn, fp):
+  return tn / (tn + fp)
 
   # Function to generate a results dataframe
 def generate_results_df(model_name, view, pipeline, eval_metrics, specificity, f1, 
