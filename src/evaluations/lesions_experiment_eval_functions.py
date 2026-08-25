@@ -17,17 +17,17 @@ def generate_lesions_results_df(model_name, lesion_type, eval_metrics, specifici
 # Function to generate model-specific list for lesion-specific training experiment for the given metric
 def generate_metric_list_for_lesions_experiment_results(model_name, baseline_df, lesions_df, metric_name):
     # Baseline metric value
-    baseline_metric_value = baseline_df[baseline_df['model'] == model_name][metric_name]
+    baseline_metric_value = baseline_df.loc[baseline_df['model'] == model_name, metric_name].iloc[0]
 
     # Experiment1 metric value (Masses only)
-    masses_only_metric_value = lesions_df[
-      (lesions_df['model'] == model_name) 
-      & (lesions_df['lesion_type'] == 'mass')][metric_name]
+    masses_only_metric_value = lesions_df.loc[
+        (lesions_df['model'] == model_name) 
+        & (lesions_df['lesion_type'] == 'mass'), metric_name].iloc[0]
 
     # Experiment 2 metric value (Calcification only)
-    calcifications_only_metric_value = lesions_df[
-      (lesions_df['model'] == model_name) 
-      & (lesions_df['lesion_type'] == 'calcification')][metric_name]
+    calcifications_only_metric_value = lesions_df.loc[
+        (lesions_df['model'] == model_name) 
+        & (lesions_df['lesion_type'] == 'calcification'), metric_name].iloc[0]
 
     return [baseline_metric_value, masses_only_metric_value, calcifications_only_metric_value]
 
