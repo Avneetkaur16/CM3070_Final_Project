@@ -49,6 +49,7 @@ def plot_grouped_bar_char_per_metric(grouped_df, legend_list, metric_name):
     plt.title(f"{metric_name}-per model and experiment grouped bar chart")
     plt.xlabel(f"Model", fontsize=12)
     plt.ylabel(f"{metric_name}", fontsize=12)
+    plt.xticks(rotation=0)
 
     plt.grid(axis='y', linestyle='-', alpha=0.6)
     plt.tight_layout()
