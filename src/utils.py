@@ -1,4 +1,3 @@
-import os
 import pandas as pd
 import tensorflow as tf
 
@@ -27,35 +26,6 @@ def update_image_path_validation(image_path):
 def update_image_path_testing(image_path):
   return image_path.replace('/kaggle/input/datasets/awsaf49/cbis-ddsm-breast-cancer-image-dataset', '/content/extracted_test_data')
 
-# Function to generate image preprocessing results dataframe
-def generate_image_preprocessing_results_df(model_name, preprocessor, eval_metrics, specificity, f1_score):
-  results_df = pd.DataFrame({
-    'model': [model_name],
-    'image_preprocessing_pipeline': [preprocessor],
-    'accuracy': [eval_metrics['accuracy']],
-    'auc': [eval_metrics['auc']],
-    'sensitivity': [eval_metrics['recall']],
-    'precision': [eval_metrics['precision']],
-    'specificity': [specificity],
-    'f1_score': [f1_score]
-  })
-  return results_df
-
-# Function to store the image preprocessing experimental results in a csv file in the google drive
-def store_image_experiment_results(results_file_path, results_df):
-  # Store the results of experiment in the image preprocessing results dataframe
-  if not os.path.isfile(results_file_path):
-    # First instance of results
-    image_preprocessing_results = results_df
-  else:  
-    # Append to the existing results if this is not the first instance
-    image_preprocessing_results = pd.read_csv(results_file_path)
-    image_preprocessing_results = pd.concat([image_preprocessing_results, results_df], ignore_index=True)
-
-  # Store the updated dataframe in a csv stored in drive
-  image_preprocessing_results.to_csv(results_file_path, index=False)
-  print(f"Stored results for {results_df['image_preprocessing_pipeline']} pipeline")
-
 # Function to compute f1 score from precision and recall
 def compute_f1_score(precision, recall):
   f1_score = 0.0
@@ -69,7 +39,7 @@ def compute_f1_score(precision, recall):
 def compute_specificity(tn, fp):
   return tn / (tn + fp)
 
-  # Function to generate a results dataframe
+# Function to generate a results dataframe
 def generate_results_df(model_name, view, pipeline, eval_metrics, specificity, f1, 
                         training_time, prediction_time, peak_memory, model_params):
   results = pd.DataFrame({
