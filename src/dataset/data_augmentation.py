@@ -12,6 +12,6 @@ data_augmentation = Sequential([
 ])
 
 # Data augmentation function
-def add_data_augmentation(image_tensor):
+def add_data_augmentation(image_tensor):    
     augmented_image = data_augmentation(image_tensor, training=True)
     return augmented_image
