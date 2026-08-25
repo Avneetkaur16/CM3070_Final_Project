@@ -17,17 +17,17 @@ def generate_viewss_results_df(model_name, view_type, eval_metrics, specificity,
 # Function to generate model-specific list for view-specific training experiment for the given metric
 def generate_metric_list_for_views_experiment_results(model_name, baseline_df, views_df, metric_name):
     # Baseline metric value
-    baseline_metric_value = baseline_df[baseline_df['model'] == model_name][metric_name]
+    baseline_metric_value = baseline_df.loc[baseline_df['model'] == model_name, metric_name].iloc[0]
 
     # Experiment1 metric value (CC only)
-    cc_only_metric_value = views_df[
+    cc_only_metric_value = views_df.loc[
       (views_df['model'] == model_name) 
-      & (views_df['view_type'] == 'CC')][metric_name]
+      & (views_df['view_type'] == 'CC'), metric_name].iloc[0]
 
     # Experiment 2 metric value (MLO only)
-    mlo_only_metric_value = views_df[
+    mlo_only_metric_value = views_df.loc[
       (views_df['model'] == model_name) 
-      & (views_df['lesion_type'] == 'MLO')][metric_name]
+      & (views_df['lesion_type'] == 'MLO'), metric_name].iloc[0]
 
     return [baseline_metric_value, cc_only_metric_value, mlo_only_metric_value]
 

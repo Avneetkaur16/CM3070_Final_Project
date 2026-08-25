@@ -17,17 +17,17 @@ def generate_image_preprocessing_results_df(model_name, preprocessor, eval_metri
 # Function to generate model-specific list for image preprocessing experiment for the given metric
 def generate_metric_list_for_image_experiment_results(model_name, baseline_df, image_preprocess_df, metric_name):
     # Baseline metric value
-    baseline_metric_value = baseline_df[baseline_df['model'] == model_name][metric_name]
+    baseline_metric_value = baseline_df.loc[baseline_df['model'] == model_name, metric_name].iloc[0]
 
     # Experiment1 metric value (CLAHE + Median blur)
-    clahe_median_blur_metric_value = image_preprocess_df[
+    clahe_median_blur_metric_value = image_preprocess_df.loc[
         (image_preprocess_df['model'] == model_name) 
-        & (image_preprocess_df['image_preprocessing_pipeline'] == 'CLAHE + Median Blur')][metric_name]
+        & (image_preprocess_df['image_preprocessing_pipeline'] == 'CLAHE + Median Blur'), metric_name].iloc[0]
 
     # Experiment 2 metric value (Histogram Equalization + Gaussian Blur)
-    histo_equalized_guass_blur_metric_value = image_preprocess_df[
+    histo_equalized_guass_blur_metric_value = image_preprocess_df.loc[
         (image_preprocess_df['model'] == model_name) 
-        & (image_preprocess_df['image_preprocessing_pipeline'] == 'Histogram Equalization + Gaussian Blur')][metric_name]
+        & (image_preprocess_df['image_preprocessing_pipeline'] == 'Histogram Equalization + Gaussian Blur'), metric_name].iloc[0]
 
     return [baseline_metric_value, clahe_median_blur_metric_value, histo_equalized_guass_blur_metric_value]
 
