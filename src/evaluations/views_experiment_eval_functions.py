@@ -25,7 +25,7 @@ def generate_metric_list_for_views_experiment_results(model_name, baseline_df, v
       & (views_df['view_type'] == 'CC')][metric_name]
 
     # Experiment 2 metric value (MLO only)
-    mlo_only_metric_value = [
+    mlo_only_metric_value = views_df[
       (views_df['model'] == model_name) 
       & (views_df['lesion_type'] == 'MLO')][metric_name]
 

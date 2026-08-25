@@ -25,7 +25,7 @@ def generate_metric_list_for_lesions_experiment_results(model_name, baseline_df,
       & (lesions_df['lesion_type'] == 'mass')][metric_name]
 
     # Experiment 2 metric value (Calcification only)
-    calcifications_only_metric_value = [
+    calcifications_only_metric_value = lesions_df[
       (lesions_df['model'] == model_name) 
       & (lesions_df['lesion_type'] == 'calcification')][metric_name]
 

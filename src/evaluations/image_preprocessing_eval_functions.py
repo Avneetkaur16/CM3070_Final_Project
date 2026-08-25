@@ -25,7 +25,7 @@ def generate_metric_list_for_image_experiment_results(model_name, baseline_df, i
         & (image_preprocess_df['image_preprocessing_pipeline'] == 'CLAHE + Median Blur')][metric_name]
 
     # Experiment 2 metric value (Histogram Equalization + Gaussian Blur)
-    histo_equalized_guass_blur_metric_value = [
+    histo_equalized_guass_blur_metric_value = image_preprocess_df[
         (image_preprocess_df['model'] == model_name) 
         & (image_preprocess_df['image_preprocessing_pipeline'] == 'Histogram Equalization + Gaussian Blur')][metric_name]
 
