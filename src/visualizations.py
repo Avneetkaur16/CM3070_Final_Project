@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, precision_recall_curve
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 # Function to plot training-validation loss for a given model
 def plot_training_validation_loss(history, model_name, preprocessor):
@@ -42,6 +42,17 @@ def plot_confusion_matrix(true_pathology, predicted_pathology, model_name, prepr
     plt.title(f"{model_name} with {preprocessor}: Confusion Matrix")
     plt.show()
 
+# Grouped models bar chart for the given metric
+def plot_grouped_bar_char_per_metric(grouped_df, legend_list, metric_name):
+    grouped_df.plot(x='model', y=legend_list, kind='bar', figsize=(10, 6), width=0.7)
+
+    plt.title(f"{metric_name}-per model and experiment grouped bar chart")
+    plt.xlabel(f"Model", fontsize=12)
+    plt.ylabel(f"{metric_name}", fontsize=12)
+
+    plt.grid(axis='y', linestyle='-', alpha=0.6)
+    plt.tight_layout()
+    plt.show()
 
 # COMPUTATIONAL COSTS GRAPHS
 
