@@ -33,10 +33,10 @@ def generate_predictions_and_evaluations(trained_model, dataset, true_labels, pr
     eval_metrics = trained_model.evaluate(dataset, return_dict=True)
     # Compute F1 score
     f1_score = compute_f1_score(eval_metrics['precision'], eval_metrics['recall'])
-    # Compute Specificity
-    specificity = compute_specificity(tn, fp)
     # Get confusion matrix values
     tn, fp, fn, tp = confusion_matrix(true_labels, predictions).ravel()
+    # Compute Specificity
+    specificity = compute_specificity(tn, fp)
 
     # Create an evaluation metrics dictionary containing ALL performance metrics
     eval_metrics_dict = {
