@@ -2,7 +2,11 @@ import pandas as pd
 import os
 
 # Function to generate results metrics dataframe
-def generate_results_metrics_df(model_name, experimental_value, eval_metrics, experiment_type):
+def generate_results_metrics_df(model_name, experimental_value, eval_metrics, train_time, infer_time, peak_memory, experiment_type):
+    # Adjust training time and peak memory usage
+    training_time = train_time / 60.0
+    peak_memory_used = peak_memory / (1024**2)
+
      # Dataframe with metrics data for image preprocessing experiment 
     if(experiment_type == 'image_preprocessing'):
         results_df = pd.DataFrame({
@@ -15,7 +19,10 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
             'sensitivity': [eval_metrics['sensitivity']],
             'precision': [eval_metrics['precision']],
             'specificity': [eval_metrics['specificity']],
-            'f1_score': [eval_metrics['f1_score']]
+            'f1_score': [eval_metrics['f1_score']],
+            'training_time_mins': [training_time],
+            'inference_time': [infer_time],
+            'peak_memory_used_MB': [peak_memory_used]
         })
 
     # Dataframe with metrics data for views-specific training experiment
@@ -30,7 +37,10 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
             'sensitivity': [eval_metrics['sensitivity']],
             'precision': [eval_metrics['precision']],
             'specificity': [eval_metrics['specificity']],
-            'f1_score': [eval_metrics['f1_score']]
+            'f1_score': [eval_metrics['f1_score']],
+            'training_time_mins': [training_time],
+            'inference_time': [infer_time],
+            'peak_memory_used_MB': [peak_memory_used]
         })
 
     # Dataframe with metrics data for lesion-specific training experiment
@@ -45,7 +55,10 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
             'sensitivity': [eval_metrics['sensitivity']],
             'precision': [eval_metrics['precision']],
             'specificity': [eval_metrics['specificity']],
-            'f1_score': [eval_metrics['f1_score']]
+            'f1_score': [eval_metrics['f1_score']],
+            'training_time_mins': [training_time],
+            'inference_time': [infer_time],
+            'peak_memory_used_MB': [peak_memory_used]
         })
 
     elif(experiment_type == 'baseline'):
@@ -59,7 +72,10 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
             'sensitivity': [eval_metrics['sensitivity']],
             'precision': [eval_metrics['precision']],
             'specificity': [eval_metrics['specificity']],
-            'f1_score': [eval_metrics['f1_score']]
+            'f1_score': [eval_metrics['f1_score']],
+            'training_time_mins': [training_time],
+            'inference_time': [infer_time],
+            'peak_memory_used_MB': [peak_memory_used]
         })
         
     return results_df
