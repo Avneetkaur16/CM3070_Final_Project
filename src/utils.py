@@ -28,7 +28,7 @@ def update_image_path_testing(image_path):
     return image_path.replace('/kaggle/input/datasets/awsaf49/cbis-ddsm-breast-cancer-image-dataset', '/content/extracted_test_data')
 
 # Function to store the experimental results in a csv file in the google drive
-def store_experiment_results(results_file_path, results_df):
+def store_experiment_results(results_file_path, results_df, experiment_type):
     # Store the results of experiment in the results dataframe
     if not os.path.isfile(results_file_path):
       # First instance of results
@@ -40,7 +40,13 @@ def store_experiment_results(results_file_path, results_df):
 
     # Store the updated dataframe in a csv stored in drive
     experiment_results.to_csv(results_file_path, index=False)
-    print(f"Stored results for {results_df['image_preprocessing_pipeline']} pipeline")
+
+    if(experiment_type == 'image_preprocessing' or experiment_type == 'baseline'):
+       print(f"Stored results for {results_df['image_preprocessing_pipeline']} pipeline")
+    elif(experiment_type == 'views'):
+       print(f"Stored results for {results_df['view_type']} views")
+    elif(experiment_type == 'lesions'):
+       print(f"Stored results for {results_df['lesion_type']} lesions")
 
 # Function to compute f1 score from precision and recall
 def compute_f1_score(precision, recall):
