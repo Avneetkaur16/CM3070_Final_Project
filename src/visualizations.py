@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 # Function to plot training-validation loss for a given model
-def plot_training_validation_loss(history, model_name, preprocessor):
+def plot_training_validation_loss(history, model_name, experiment_variable):
     model_history = history.history
     training_loss = model_history['loss']
     validation_loss = model_history['val_loss']
@@ -11,14 +11,14 @@ def plot_training_validation_loss(history, model_name, preprocessor):
     plt.figure(figsize=(5, 5))
     plt.plot(epochs, training_loss, label='Training Loss')
     plt.plot(epochs, validation_loss, label='Validation Loss')
-    plt.title(f"{model_name} with {preprocessor}: Training and Validation Loss Curve")
+    plt.title(f"{model_name} with {experiment_variable}: Training and Validation Loss Curve")
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
     plt.legend()
     plt.show()
 
 # Function to plot training-validation accuracy for a given model
-def plot_training_validation_accuracy(history, model_name, preprocessor):
+def plot_training_validation_accuracy(history, model_name, experiment_variable):
     model_history = history.history
     training_accuracy = model_history['accuracy']
     validation_accuracy = model_history['val_accuracy']
@@ -27,19 +27,19 @@ def plot_training_validation_accuracy(history, model_name, preprocessor):
     plt.figure(figsize=(5, 5))
     plt.plot(epochs, training_accuracy, label='Training Accuracy')
     plt.plot(epochs, validation_accuracy, label='Validation Accuracy')
-    plt.title(f"{model_name} with {preprocessor}: Training and Validation Accuracy Curve")
+    plt.title(f"{model_name} with {experiment_variable}: Training and Validation Accuracy Curve")
     plt.xlabel('Epochs')
     plt.ylabel('Accuracy')
     plt.legend()
     plt.show()
 
 # Confusion matrix for a given model
-def plot_confusion_matrix(true_pathology, predicted_pathology, model_name, preprocessor):
+def plot_confusion_matrix(true_pathology, predicted_pathology, model_name, experiment_variable):
     cm = confusion_matrix(true_pathology, predicted_pathology)
     cm_disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['BENIGN', 'MALIGNANT'])
     cm_disp.plot(cmap=plt.cm.Purples)
 
-    plt.title(f"{model_name} with {preprocessor}: Confusion Matrix")
+    plt.title(f"{model_name} with {experiment_variable}: Confusion Matrix")
     plt.show()
 
 # Grouped models bar chart for the given metric
