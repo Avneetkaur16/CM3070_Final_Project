@@ -12,7 +12,7 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
             'lesion_type': 'Unified',
             'accuracy': [eval_metrics['accuracy']],
             'auc': [eval_metrics['auc']],
-            'sensitivity': [eval_metrics['recall']],
+            'sensitivity': [eval_metrics['sensitivity']],
             'precision': [eval_metrics['precision']],
             'specificity': [eval_metrics['specificity']],
             'f1_score': [eval_metrics['f1_score']]
@@ -27,7 +27,7 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
             'lesion_type': 'Unified',
             'accuracy': [eval_metrics['accuracy']],
             'auc': [eval_metrics['auc']],
-            'sensitivity': [eval_metrics['recall']],
+            'sensitivity': [eval_metrics['sensitivity']],
             'precision': [eval_metrics['precision']],
             'specificity': [eval_metrics['specificity']],
             'f1_score': [eval_metrics['f1_score']]
@@ -42,7 +42,7 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
             'lesion_type': [experimental_value],
             'accuracy': [eval_metrics['accuracy']],
             'auc': [eval_metrics['auc']],
-            'sensitivity': [eval_metrics['recall']],
+            'sensitivity': [eval_metrics['sensitivity']],
             'precision': [eval_metrics['precision']],
             'specificity': [eval_metrics['specificity']],
             'f1_score': [eval_metrics['f1_score']]
@@ -56,7 +56,7 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
             'lesion_type': 'Unified',
             'accuracy': [eval_metrics['accuracy']],
             'auc': [eval_metrics['auc']],
-            'sensitivity': [eval_metrics['recall']],
+            'sensitivity': [eval_metrics['sensitivity']],
             'precision': [eval_metrics['precision']],
             'specificity': [eval_metrics['specificity']],
             'f1_score': [eval_metrics['f1_score']]
