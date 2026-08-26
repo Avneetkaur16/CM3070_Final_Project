@@ -64,6 +64,29 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
         
     return results_df
 
+# Function to store the experimental results in a csv file in the google drive
+def store_experiment_results(results_file_path, results_df, experiment_type):
+    # Store the results of experiment in the results dataframe
+    if not os.path.isfile(results_file_path):
+      # First instance of results
+      experiment_results = results_df
+    else:  
+      # Append to the existing results if this is not the first instance
+      experiment_results = pd.read_csv(results_file_path)
+      experiment_results = pd.concat([experiment_results, results_df], ignore_index=True)
+
+    # Store the updated dataframe in a csv stored in drive
+    experiment_results.to_csv(results_file_path, index=False)
+
+    if(experiment_type == 'image_preprocessing'):
+       print(f"Stored results for {results_df['image_preprocessing_pipeline']} pipeline")
+    elif(experiment_type == 'views'):
+       print(f"Stored results for {results_df['view_type']} views")
+    elif(experiment_type == 'lesions'):
+       print(f"Stored results for {results_df['lesion_type']} lesions")
+    elif(experiment_type == 'baseline'):
+        print(f"Stored results for the baseline")
+
 # Function to generate model-specific list for baseline, given experiment and the given metric
 def generate_metric_list_for_experiment_results(model_name, baseline_df, experimental_df, metric_name, experiment_type):
     # Baseline metric value
@@ -145,27 +168,3 @@ def generate_grouped_dataframe_for_experiment_results(data_dict, experiment_type
     # Create a dataframe using grouped models data
     grouped_models_df = pd.DataFrame(grouped_models_data)
     return grouped_models_df
-
-# Function to store the experimental results in a csv file in the google drive
-def store_experiment_results(results_file_path, results_df, experiment_type):
-    # Store the results of experiment in the results dataframe
-    if not os.path.isfile(results_file_path):
-      # First instance of results
-      experiment_results = results_df
-    else:  
-      # Append to the existing results if this is not the first instance
-      experiment_results = pd.read_csv(results_file_path)
-      experiment_results = pd.concat([experiment_results, results_df], ignore_index=True)
-
-    # Store the updated dataframe in a csv stored in drive
-    experiment_results.to_csv(results_file_path, index=False)
-
-    if(experiment_type == 'image_preprocessing'):
-       print(f"Stored results for {results_df['image_preprocessing_pipeline']} pipeline")
-    elif(experiment_type == 'views'):
-       print(f"Stored results for {results_df['view_type']} views")
-    elif(experiment_type == 'lesions'):
-       print(f"Stored results for {results_df['lesion_type']} lesions")
-    elif(experiment_type == 'baseline'):
-        print(f"Stored results for the baseline")
-

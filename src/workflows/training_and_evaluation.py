@@ -8,7 +8,13 @@ def train_selected_model(model, train_dataset, val_dataset, epochs, earlystoppin
     # Compile the selected model
     model = compile_model(model)
     # Fit the model with training data, validation data. Use early stopping for early stop and class_weight_dict for class-imbalance
-    model.fit(train_dataset, val_dataset, epochs, callbacks=[earlystopping], class_weight=class_weight_dict)
+    model.fit(
+        train_dataset, 
+        validation_data=val_dataset, 
+        epochs=epochs, 
+        callbacks=[earlystopping], 
+        class_weight=class_weight_dict
+    )
     # Return the trained model
     return model
 
