@@ -42,6 +42,7 @@ def generate_dataset(df, preprocessor):
 
     return dataset
 
+# Function to create class weight to handle class-imbalance
 def generate_class_weight_dict(df, classes, total_samples):
     # Count the no. of samples with 0.0 and 1.0 pathologies
     samples_count_0 = len(df[df['pathology'] == 0.0])
