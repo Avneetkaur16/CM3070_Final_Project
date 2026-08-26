@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Function to generate view-specific training results dataframe
-def generate_viewss_results_df(model_name, view_type, eval_metrics, specificity, f1_score):
+def generate_views_results_df(model_name, view_type, eval_metrics, specificity, f1_score):
     results_df = pd.DataFrame({
         'model': [model_name],
         'view_type': [view_type],
