@@ -21,7 +21,7 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, tr
             'specificity': [eval_metrics['specificity']],
             'f1_score': [eval_metrics['f1_score']],
             'training_time_mins': [training_time],
-            'inference_time': [infer_time],
+            'inference_time_sec': [infer_time],
             'peak_memory_used_MB': [peak_memory_used]
         })
 
@@ -39,7 +39,7 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, tr
             'specificity': [eval_metrics['specificity']],
             'f1_score': [eval_metrics['f1_score']],
             'training_time_mins': [training_time],
-            'inference_time': [infer_time],
+            'inference_time_sec': [infer_time],
             'peak_memory_used_MB': [peak_memory_used]
         })
 
@@ -57,7 +57,7 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, tr
             'specificity': [eval_metrics['specificity']],
             'f1_score': [eval_metrics['f1_score']],
             'training_time_mins': [training_time],
-            'inference_time': [infer_time],
+            'inference_time_sec': [infer_time],
             'peak_memory_used_MB': [peak_memory_used]
         })
 
@@ -74,7 +74,7 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, tr
             'specificity': [eval_metrics['specificity']],
             'f1_score': [eval_metrics['f1_score']],
             'training_time_mins': [training_time],
-            'inference_time': [infer_time],
+            'inference_time_sec': [infer_time],
             'peak_memory_used_MB': [peak_memory_used]
         })
         
