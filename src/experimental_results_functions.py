@@ -128,7 +128,7 @@ def generate_metric_list_for_experiment_results(model_name, baseline_df, experim
     
         # Experiment 2 metric value (MLO only)
         mlo_only_metric_value = experimental_df.loc[(experimental_df['model'] == model_name) 
-            & (experimental_df['lesion_type'] == 'MLO'), metric_name].iloc[0]
+            & (experimental_df['view_type'] == 'MLO'), metric_name].iloc[0]
 
         return [baseline_metric_value, cc_only_metric_value, mlo_only_metric_value]
 
