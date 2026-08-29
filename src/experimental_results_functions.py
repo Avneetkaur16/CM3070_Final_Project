@@ -134,15 +134,15 @@ def generate_metric_list_for_experiment_results(model_name, baseline_df, experim
 
     # Lesion-specific training Experiment
     elif(experiment_type == 'lesions'):
-        # Experiment1 metric value (Masses only)
-        masses_only_metric_value = experimental_df.loc[(experimental_df['model'] == model_name) 
-            & (experimental_df['lesion_type'] == 'Mass-Only-Lesion'), metric_name].iloc[0]
-
-        # Experiment 2 metric value (Calcification only)
+        # Experiment 1 metric value (Calcification only)
         calcifications_only_metric_value = experimental_df.loc[(experimental_df['model'] == model_name) 
             & (experimental_df['lesion_type'] == 'Calcification-Only-Lesion'), metric_name].iloc[0]
 
-        return [baseline_metric_value, masses_only_metric_value, calcifications_only_metric_value]
+        # Experiment2 metric value (Masses only)
+        masses_only_metric_value = experimental_df.loc[(experimental_df['model'] == model_name) 
+            & (experimental_df['lesion_type'] == 'Mass-Only-Lesion'), metric_name].iloc[0]
+        
+        return [baseline_metric_value, calcifications_only_metric_value, masses_only_metric_value]
     else:
         return None
 
@@ -168,17 +168,17 @@ def generate_grouped_dataframe_for_experiment_results(data_dict, experiment_type
         # Experiment: View-specific training
         grouped_models_data = {
             'model': ['VGG16', 'ResNet50', 'DenseNet121', 'MobileNetV2', 'EfficientNet-B0'],
-            'Baseline': [vgg16_list[0], resnet50_list[0], densenet121_list[0], mobilenetv2_list[0], efficientnetb0_list[0]],
-            'CC-Only': [vgg16_list[1], resnet50_list[1], densenet121_list[1], mobilenetv2_list[1], efficientnetb0_list[1]],
-            'MLO-Only': [vgg16_list[2], resnet50_list[2], densenet121_list[2], mobilenetv2_list[2], efficientnetb0_list[2]]
+            'Baseline (Unified)': [vgg16_list[0], resnet50_list[0], densenet121_list[0], mobilenetv2_list[0], efficientnetb0_list[0]],
+            'CC-Only-View': [vgg16_list[1], resnet50_list[1], densenet121_list[1], mobilenetv2_list[1], efficientnetb0_list[1]],
+            'MLO-Only-View': [vgg16_list[2], resnet50_list[2], densenet121_list[2], mobilenetv2_list[2], efficientnetb0_list[2]]
         }
     elif(experiment_type == 'lesions'):
         # Experiment: Lesion-specific training
         grouped_models_data = {
             'model': ['VGG16', 'ResNet50', 'DenseNet121', 'MobileNetV2', 'EfficientNet-B0'],
-            'Baseline': [vgg16_list[0], resnet50_list[0], densenet121_list[0], mobilenetv2_list[0], efficientnetb0_list[0]],
-            'Mass-Only': [vgg16_list[1], resnet50_list[1], densenet121_list[1], mobilenetv2_list[1], efficientnetb0_list[1]],
-            'Calcification-Only': [vgg16_list[2], resnet50_list[2], densenet121_list[2], mobilenetv2_list[2], efficientnetb0_list[2]]
+            'Baseline (Unified)': [vgg16_list[0], resnet50_list[0], densenet121_list[0], mobilenetv2_list[0], efficientnetb0_list[0]],
+            'Calcification-Only-Lesion': [vgg16_list[1], resnet50_list[1], densenet121_list[1], mobilenetv2_list[1], efficientnetb0_list[1]],
+            'Mass-Only-Lesion': [vgg16_list[2], resnet50_list[2], densenet121_list[2], mobilenetv2_list[2], efficientnetb0_list[2]]
         }
 
     # Create a dataframe using grouped models data
