@@ -43,7 +43,7 @@ def plot_confusion_matrix(true_pathology, predicted_pathology, model_name, exper
     plt.show()
 
 # Grouped models bar chart for the given metric
-def plot_grouped_bar_char_per_metric(grouped_df, legend_list, metric_name):
+def plot_grouped_bar_chart_per_metric(grouped_df, legend_list, metric_name):
     grouped_df.plot(x='model', y=legend_list, kind='bar', figsize=(12, 6), width=0.7)
 
     plt.title(f"{metric_name}-per model and experiment grouped bar chart")
