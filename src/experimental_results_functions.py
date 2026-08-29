@@ -124,11 +124,11 @@ def generate_metric_list_for_experiment_results(model_name, baseline_df, experim
     elif(experiment_type == 'views'):
         # Experiment1 metric value (CC only)
         cc_only_metric_value = experimental_df.loc[(experimental_df['model'] == model_name) 
-            & (experimental_df['view_type'] == 'CC'), metric_name].iloc[0]
+            & (experimental_df['view_type'] == 'CC-Only-View'), metric_name].iloc[0]
     
         # Experiment 2 metric value (MLO only)
         mlo_only_metric_value = experimental_df.loc[(experimental_df['model'] == model_name) 
-            & (experimental_df['view_type'] == 'MLO'), metric_name].iloc[0]
+            & (experimental_df['view_type'] == 'MLO-Only-View'), metric_name].iloc[0]
 
         return [baseline_metric_value, cc_only_metric_value, mlo_only_metric_value]
 
@@ -136,11 +136,11 @@ def generate_metric_list_for_experiment_results(model_name, baseline_df, experim
     elif(experiment_type == 'lesions'):
         # Experiment1 metric value (Masses only)
         masses_only_metric_value = experimental_df.loc[(experimental_df['model'] == model_name) 
-            & (experimental_df['lesion_type'] == 'mass'), metric_name].iloc[0]
+            & (experimental_df['lesion_type'] == 'Mass-Only-Lesion'), metric_name].iloc[0]
 
         # Experiment 2 metric value (Calcification only)
         calcifications_only_metric_value = experimental_df.loc[(experimental_df['model'] == model_name) 
-            & (experimental_df['lesion_type'] == 'calcification'), metric_name].iloc[0]
+            & (experimental_df['lesion_type'] == 'Calcification-Only-Lesion'), metric_name].iloc[0]
 
         return [baseline_metric_value, masses_only_metric_value, calcifications_only_metric_value]
     else:
