@@ -1,5 +1,5 @@
 import tensorflow as tf
-from src.constants import TEMPERATURE_OPTIMIZATION_STEPS
+from src.constants import TEMPERATURE_OPTIMIZATION_STEPS, TEMPERATURE_OPTIMIZATION_LEARNING_RATE
 
 # Function to calculate Negative Log-Like Loss for temperature scaling
 def compute_nll(temperature, original_logits, true_labels):
@@ -12,8 +12,8 @@ def compute_nll(temperature, original_logits, true_labels):
 
 # Function to perform temperature scaling
 def temperature_scaling(original_logits, true_labels, temperature):
-  # Define an optimizer for temperature optimization with learning rate 1e-4
-  temp_optimizer = tf.keras.optimizers.Adam(learning_rate=0.0001)
+  # Define an optimizer for temperature optimization with learning rate 1e-2
+  temp_optimizer = tf.keras.optimizers.Adam(learning_rate=TEMPERATURE_OPTIMIZATION_LEARNING_RATE)
 
   for i in range(TEMPERATURE_OPTIMIZATION_STEPS):
     # Record all computations of NLL loss
