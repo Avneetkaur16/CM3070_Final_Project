@@ -2,13 +2,13 @@ import pandas as pd
 import os
 
 # Function to generate results dataframe for final configuration models
-def generate_final_results_df(model_name, lesion, eval_metrics, train_time, infer_time, peak_memory, 
+def generate_final_results_df(model_name, view, lesion, eval_metrics, train_time, infer_time, peak_memory, 
                               ece_before_scaling, ece_after_scaling, brier_score_before_scaling, brier_score_after_scaling):
     # Create a result dataframe for the given data
     result_df = pd.DataFrame({
         'model': model_name,
         'image_preprocessing_pipeline': 'CLAHE + Median Blur', # from image preprocessing experiment results
-        'view_type': 'CC-Only-View', # from view-specific training experiment results 
+        'view_type': [view], 
         'lesion_type': [lesion],
         'accuracy': [eval_metrics['accuracy']],
         'auc': [eval_metrics['auc']],
