@@ -63,7 +63,7 @@ def generate_metrics_list_from_final_results(model_name, baseline_df, calci_df, 
 
     # Unified-Mass-Only metric
     uni_mass_metric = mass_df.loc[(mass_df['model'] == model_name)
-                       & (mass_df['view_type'] == 'Unified_View')
+                       & (mass_df['view_type'] == 'Unified-View')
                        & (mass_df['lesion_type'] == 'Mass-Only-Lesion'), metric_name].iloc[0]
 
     return [baseline_metric, cc_calci_metric, cc_mass_metric, uni_calci_metric, uni_mass_metric]
