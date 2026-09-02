@@ -1,5 +1,8 @@
+import tensorflow as tf
 import pandas as pd
 import os
+from sklearn.metrics import confusion_matrix
+from src.utils import compute_accuracy, compute_f1_score, compute_precision, compute_sensitivity, compute_specificity
 
 # Function to generate results dataframe for final configuration models
 def generate_final_results_df(model_name, view, lesion, eval_metrics, train_time, infer_time, peak_memory, 
@@ -87,3 +90,41 @@ def generate_grouped_dataframe_for_final_results(data_dict):
     })
 
     return grouped_df
+
+# Function for patient level evaluations of a model for a given dataset
+def patient_level_evaluation_metrics(model, df, dataset, prediction_threshold):
+    # Compute logits from the dataset
+    logits = model.predict(dataset)
+    # Calculate probabilities from logits
+    probs = tf.nn.sigmoid(logits)
+    # Compute predictions from prediction probabilities
+    preds = tf.cast(probs >= prediction_threshold, tf.float32)
+
+    # Create a copy of the original dataframe
+    new_df = df.copy()
+    # Add prediction column to the new df with prediction values calculated above
+    new_df['prediction'] = preds.numpy()
+
+    # Group the new dataframe on 'patient_id' based on max() values of pathology and prediction
+    patient_level_df = new_df.groupby('patient_id')[['pathology', 'prediction']].max().reset_index()
+
+    # Get confusion matrix values from the patient level dataframe
+    tn, fp, fn, tp = confusion_matrix(patient_level_df['pathology'], patient_level_df['prediction']).ravel()
+
+    # Calculate evaluation metrics
+    accuracy = compute_accuracy(tp, tn, fp, fn)
+    sensitivity = compute_sensitivity(tp, fn)
+    specificity = compute_specificity(tn, fp)
+    precision = compute_precision(tp, fp)
+    f1_score = compute_f1_score(precision, sensitivity)
+
+    # Create a patient-level evaluation metrics dictionary
+    patient_level_metrics = {
+        'accuracy': accuracy,
+        'sensitivity': sensitivity,
+        'specificity': specificity,
+        'precision': precision,
+        'f1_score': f1_score   
+    }
+
+    return patient_level_metrics
