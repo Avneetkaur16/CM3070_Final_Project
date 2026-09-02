@@ -67,3 +67,23 @@ def generate_metrics_list_from_final_results(model_name, baseline_df, calci_df, 
                        & (mass_df['lesion_type'] == 'Mass-Only-Lesion'), metric_name].iloc[0]
 
     return [baseline_metric, cc_calci_metric, cc_mass_metric, uni_calci_metric, uni_mass_metric]
+
+def generate_grouped_dataframe_for_final_results(data_dict):
+    # Extract all metric lists from data dict
+    vgg16 = data_dict['vgg16']
+    resnet50 = data_dict['resnet50']
+    densenet121 = data_dict['densenet121']
+    mobilenetv2 = data_dict['mobilenetv2']
+    efficientnetb0 = data_dict['efficientnetb0']
+
+    # Create a grouped dataframe
+    grouped_df = pd.DataFrame({
+        'model': ['VGG16', 'ResNet50', 'DenseNet121', 'MobileNetV2', 'EfficientNet-B0'],
+        'Baseline': [vgg16[0], resnet50[0], densenet121[0], mobilenetv2[0], efficientnetb0[0]],
+        'CC-Only-Calci-Only': [vgg16[1], resnet50[1], densenet121[1], mobilenetv2[1], efficientnetb0[1]],
+        'CC-Only-Mass-Only': [vgg16[2], resnet50[2], densenet121[2], mobilenetv2[2], efficientnetb0[2]],
+        'Unified-Calci-Only': [vgg16[3], resnet50[3], densenet121[3], mobilenetv2[3], efficientnetb0[3]],
+        'Unified-Mass-Only': [vgg16[4], resnet50[4], densenet121[4], mobilenetv2[4], efficientnetb0[4]]
+    })
+
+    return grouped_df

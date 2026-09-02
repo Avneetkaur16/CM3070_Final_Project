@@ -55,6 +55,20 @@ def plot_grouped_bar_chart_per_metric(grouped_df, legend_list, metric_name):
     plt.tight_layout()
     plt.show()
 
+# Grouped models bar chart for final configurations and given metric
+def plot_grouped_bar_chart_per_metric_final(grouped_df, legend_list, metric_name):
+    grouped_df.plot(x='model', y=legend_list, kind='bar', figsize=(14, 6), width=0.5)
+    
+    plt.title(f"{metric_name}-per model for final configuration grouped bar chart")
+    plt.xlabel(f"Model", fontsize=12)
+    plt.ylabel(f"{metric_name}", fontsize=12)
+    plt.xticks(rotation=0)
+
+    plt.grid(axis='y', linestyle='-', alpha=0.6)
+    plt.tight_layout()
+    plt.show()
+
+
 # COMPUTATIONAL COSTS GRAPHS
 
 # Bar chart for performance metrics for a given model
