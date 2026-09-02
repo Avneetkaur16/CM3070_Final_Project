@@ -73,13 +73,13 @@ def plot_grouped_bar_chart_per_metric_final(grouped_df, legend_list, metric_name
 
 # Grouped models horizontal bar chart for final configurations and given computational metric
 def plot_computational_grouped_bar_chart_per_metric_final(grouped_df, legend_list, metric_name):
-    grouped_df.plot(x=legend_list, y='model', kind='barh', figsize=(6, 10), width=0.5)
+    grouped_df.plot(x='model', y=legend_list, kind='barh', figsize=(10, 7), width=0.7)
     
     plt.title(f"{metric_name}-per model for final configuration grouped bar chart")
     plt.ylabel(f"Model", fontsize=12)
     plt.xlabel(f"{metric_name}", fontsize=12)
     plt.yticks(rotation=0)
 
-    plt.grid(axis='y', linestyle='-', alpha=0.6)
+    plt.grid(axis='x', linestyle='-', alpha=0.6)
     plt.tight_layout()
     plt.show()
