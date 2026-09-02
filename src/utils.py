@@ -20,3 +20,14 @@ def compute_f1_score(precision, recall):
 # Function to compute specificity using true negatives and false positives
 def compute_specificity(tn, fp):
     return tn / (tn + fp)
+
+# Function to compute accuracy
+def compute_accuracy(tp, tn, fp, fn):
+    return (tp + tn) / (tp + tn + fp + fn)
+
+# Function to compute sensitivity (recall)
+def compute_sensitivity(tp, fn):
+    return tp / (tp + fn)
+
+def compute_precision(tp, fp):
+    return tp / (tp + fp)
