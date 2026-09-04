@@ -64,7 +64,7 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
     return results_df
 
 # Function to store the experimental results in a csv file in the google drive
-def store_experiment_results(results_file_path, results_df, experiment_type):
+def store_experiment_results(results_file_path, results_df):
     # Store the results of experiment in the results dataframe
     if not os.path.isfile(results_file_path):
       # First instance of results
@@ -76,12 +76,3 @@ def store_experiment_results(results_file_path, results_df, experiment_type):
 
     # Store the updated dataframe in a csv stored in drive
     experiment_results.to_csv(results_file_path, index=False)
-
-    if(experiment_type == 'image_preprocessing'):
-       print(f"Stored results for {results_df['image_preprocessing_pipeline']} pipeline")
-    elif(experiment_type == 'views'):
-       print(f"Stored results for {results_df['view_type']} views")
-    elif(experiment_type == 'lesions'):
-       print(f"Stored results for {results_df['lesion_type']} lesions")
-    elif(experiment_type == 'baseline'):
-        print(f"Stored results for the baseline")

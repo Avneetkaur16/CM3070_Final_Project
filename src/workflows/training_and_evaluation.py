@@ -70,7 +70,7 @@ def generate_predictions_and_evaluations(trained_model, dataset, true_labels, pr
 
     # Create an evaluation metrics dictionary containing ALL performance metrics
     eval_metrics_dict = {
-        'pr_auc': eval_metrics['pr_auc'],
+        'pr_auc': eval_metrics['auc'],
         'sensitivity': eval_metrics['recall'],
         'specificity': specificity,
         'precision': eval_metrics['precision'],
