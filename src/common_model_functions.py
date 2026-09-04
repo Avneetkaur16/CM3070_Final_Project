@@ -31,9 +31,8 @@ def compile_model(model):
         optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001), 
         loss=tf.keras.losses.BinaryCrossentropy(from_logits=True), 
         metrics=[
-        'accuracy',
-        tf.keras.metrics.Precision(name='precision'),
-        tf.keras.metrics.Recall(name='recall'),
-        tf.keras.metrics.AUC(name='auc')
+            tf.keras.metrics.AUC(curve='PR', name='auc'),
+            tf.keras.metrics.Precision(name='precision'),
+            tf.keras.metrics.Recall(name='recall')
     ])
     return model

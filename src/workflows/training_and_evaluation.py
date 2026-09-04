@@ -59,7 +59,7 @@ def generate_predictions_and_evaluations(trained_model, dataset, true_labels, pr
     inference_time = prediction_time / num_samples
 
     # Evaluations
-    # Get evaluation metrics (AUC, Accuracy, Precision, Recall) from the trained model using the given dataset
+    # Get evaluation metrics (PR-AUC, Recall/Sensitivity, Precision) from the trained model using the given dataset
     eval_metrics = trained_model.evaluate(dataset, return_dict=True)
     # Compute F1 score
     f1_score = compute_f1_score(eval_metrics['precision'], eval_metrics['recall'])
@@ -70,11 +70,10 @@ def generate_predictions_and_evaluations(trained_model, dataset, true_labels, pr
 
     # Create an evaluation metrics dictionary containing ALL performance metrics
     eval_metrics_dict = {
-        'auc': eval_metrics['auc'],
-        'accuracy': eval_metrics['accuracy'],
-        'precision': eval_metrics['precision'],
+        'pr_auc': eval_metrics['pr_auc'],
         'sensitivity': eval_metrics['recall'],
         'specificity': specificity,
+        'precision': eval_metrics['precision'],
         'f1_score': f1_score
     }
 
