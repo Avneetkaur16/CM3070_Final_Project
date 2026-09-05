@@ -35,7 +35,7 @@ def train_selected_model(model, train_dataset, val_dataset, epochs, earlystoppin
     return model, training_time, peak_memory
 
 # Function to get logits, predictions and evaluation metrics from the trained model using test/validation dataset
-def generate_predictions_and_evaluations(trained_model, dataset, true_labels, prediction_threshold):
+def generate_predictions_and_evaluations(trained_model, dataset, true_labels, classification_threshold):
     # Predictions
 
     # No. of samples in the dataset
@@ -50,8 +50,8 @@ def generate_predictions_and_evaluations(trained_model, dataset, true_labels, pr
 
     # Get probabilities from the logits using sigmoid activation function
     probabilities = tf.nn.sigmoid(logits)
-    # Get predictions from the probabilities based on prediction threshold value
-    predictions = tf.cast(probabilities >= prediction_threshold, tf.float32)
+    # Get predictions from the probabilities based on classification threshold value
+    predictions = tf.cast(probabilities >= classification_threshold, tf.float32)
 
     # Total prediction time
     prediction_time = prediction_end - prediction_start
