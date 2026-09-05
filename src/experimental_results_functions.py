@@ -35,7 +35,7 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
     elif(experiment_type == 'lesions'):
         results_df = pd.DataFrame({
             'model': [model_name],
-            'image_preprocessing_pipeline': 'Baseline',
+            'image_preprocessing_pipeline': 'CLAHE + Median Blur', # From image preprocessing experiment results
             'view_type': 'Unified',
             'lesion_type': [experimental_value],
             'pr_auc': [eval_metrics['pr_auc']],
