@@ -31,20 +31,6 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
             'f1_score': [eval_metrics['f1_score']],
         })
 
-    # Dataframe with metrics data for lesion-specific training experiment
-    elif(experiment_type == 'lesions'):
-        results_df = pd.DataFrame({
-            'model': [model_name],
-            'image_preprocessing_pipeline': 'CLAHE + Median Blur', # From image preprocessing experiment results
-            'view_type': 'Unified',
-            'lesion_type': [experimental_value],
-            'pr_auc': [eval_metrics['pr_auc']],
-            'sensitivity': [eval_metrics['sensitivity']],
-            'precision': [eval_metrics['precision']],
-            'specificity': [eval_metrics['specificity']],
-            'f1_score': [eval_metrics['f1_score']],
-        })
-
     elif(experiment_type == 'baseline'):
         results_df = pd.DataFrame({
             'model': [model_name],
@@ -58,6 +44,24 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
             'f1_score': [eval_metrics['f1_score']],
         })
         
+    return results_df
+
+# Lesion-specific results metrics dataframe
+def generate_lesion_results_metrics_df(model_name, experimental_value, eval_metrics, train_time, infer_time, peak_memory):
+    results_df = pd.DataFrame({
+                'model': [model_name],
+                'image_preprocessing_pipeline': 'CLAHE + Median Blur', # From image preprocessing experiment results
+                'view_type': 'CC-Only-View', # From view-specific training experiment results
+                'lesion_type': [experimental_value],
+                'pr_auc': [eval_metrics['pr_auc']],
+                'sensitivity': [eval_metrics['sensitivity']],
+                'precision': [eval_metrics['precision']],
+                'specificity': [eval_metrics['specificity']],
+                'f1_score': [eval_metrics['f1_score']],
+                'train_time_mins': [train_time / 60.0],
+                'infer_time_secs': [infer_time],
+                'peak_memory_used_MB': [peak_memory / (1024**2)]
+            })
     return results_df
 
 # Function to store the experimental results in a csv file in the google drive
