@@ -50,7 +50,7 @@ def generate_results_metrics_df(model_name, experimental_value, eval_metrics, ex
 def generate_lesion_results_metrics_df(model_name, experimental_value, eval_metrics, train_time, infer_time, peak_memory):
     results_df = pd.DataFrame({
                 'model': [model_name],
-                'image_preprocessing_pipeline': 'CLAHE + Median Blur', # From image preprocessing experiment results
+                'image_preprocessing_pipeline': 'Baseline', # From image preprocessing experiment results
                 'view_type': 'CC-Only-View', # From view-specific training experiment results
                 'lesion_type': [experimental_value],
                 'pr_auc': [eval_metrics['pr_auc']],
