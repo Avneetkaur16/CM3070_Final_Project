@@ -16,7 +16,7 @@ def create_densenet121_model():
     x = tf.keras.applications.densenet.preprocess_input(input)
 
     # Train the model with imagenet weights
-    x = densenet121(input, training=False)
+    x = densenet121(x, training=False)
 
     # Classification
     x = layers.GlobalAveragePooling2D(name="global_average_pooling")(x)

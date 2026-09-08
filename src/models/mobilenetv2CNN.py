@@ -16,7 +16,7 @@ def create_mobilenetv2_model():
     x = tf.keras.applications.mobilenet_v2.preprocess_input(input)
 
     # Train the model with imagenet weights
-    x = mobilenetv2(input, training=False)
+    x = mobilenetv2(x, training=False)
 
     # Classification
     x = layers.GlobalAveragePooling2D(name="global_average_pooling")(x)

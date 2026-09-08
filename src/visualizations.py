@@ -25,31 +25,3 @@ def plot_confusion_matrix(true_pathology, predicted_pathology, model_name, exper
 
     plt.title(f"{model_name} with {experiment_variable}: Confusion Matrix")
     plt.show()
-
-# Grouped models bar chart for the given metric
-def plot_grouped_bar_chart_per_metric(grouped_df, legend_list, metric_name):
-    grouped_df.plot(x='model', y=legend_list, kind='bar', figsize=(12, 6), width=0.7)
-
-    plt.title(f"{metric_name}-per model grouped bar chart")
-    plt.xlabel(f"Model", fontsize=12)
-    plt.ylabel(f"{metric_name}", fontsize=12)
-    plt.xticks(rotation=0)
-
-    plt.grid(axis='y', linestyle='-', alpha=0.6)
-    plt.tight_layout()
-    plt.show()
-
-# COMPUTATIONAL COSTS GRAPHS
-
-# Grouped models horizontal bar chart for final configurations and given computational metric
-def plot_computational_grouped_bar_chart_per_metric_final(grouped_df, legend_list, metric_name):
-    grouped_df.plot(x='model', y=legend_list, kind='barh', figsize=(10, 7), width=0.7)
-    
-    plt.title(f"{metric_name}-per model for final configuration grouped bar chart")
-    plt.ylabel(f"Model", fontsize=12)
-    plt.xlabel(f"{metric_name}", fontsize=12)
-    plt.yticks(rotation=0)
-
-    plt.grid(axis='x', linestyle='-', alpha=0.6)
-    plt.tight_layout()
-    plt.show()

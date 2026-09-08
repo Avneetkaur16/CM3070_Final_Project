@@ -16,7 +16,7 @@ def create_resnet50_model():
     x = tf.keras.applications.resnet50.preprocess_input(input)
 
     # Train the ResNet50 model using imagenet weights
-    x = resnet50(input, training=False)
+    x = resnet50(x, training=False)
 
     # Classification
     x = layers.GlobalAveragePooling2D(name="global_average_pooling")(x)

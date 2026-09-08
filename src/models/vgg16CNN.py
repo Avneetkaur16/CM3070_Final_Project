@@ -16,7 +16,7 @@ def create_vgg16_model():
     x = tf.keras.applications.vgg16.preprocess_input(input)
 
     # Train the VGG16 model using imagenet weights
-    x = vgg16(input, training=False)
+    x = vgg16(x, training=False)
 
     # Classification
     x = layers.GlobalAveragePooling2D(name="global_average_pooling")(x)

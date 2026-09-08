@@ -11,7 +11,7 @@ def clahe_image(image):
     gray_image_1_channel = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     # Apply CLAHE to 1 channel grayscaled image
-    clahe = cv2.createCLAHE(clipLimit=1.0, tileGridSize=(8, 8))
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
     clahed_image = clahe.apply(gray_image_1_channel)
 
     # Convert 1 channel CLAHE image to 3 channel image
