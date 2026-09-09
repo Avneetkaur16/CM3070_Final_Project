@@ -25,3 +25,19 @@ def plot_confusion_matrix(true_pathology, predicted_pathology, model_name, exper
 
     plt.title(f"{model_name} with {experiment_variable}: Confusion Matrix")
     plt.show()
+
+# Receiver Operating Characteristic ROC Curve
+def plot_roc_curve(tpr, fpr):
+    plt.figure(figsize=(5, 5))
+    plt.plot(fpr, tpr, label='ROC')
+    plt.xlabel('False-Positive-Rate')
+    plt.ylabel('True-Positive-Rate')
+    plt.show()
+
+# Youden's Index 
+def plot_youdens_index(thresholds, j):
+    plt.figure(figsize=(5, 5))
+    plt.plot(thresholds, j, label="Youden's Index")
+    plt.xlabel('Classification Thresholds')
+    plt.ylabel("Youden's Index")
+    plt.show()
