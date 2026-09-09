@@ -13,12 +13,11 @@ def generate_final_results_df(model_name, lesion, eval_metrics, ece_before_scali
         'image_preprocessing_pipeline': 'Baseline', # from image preprocessing experiment results
         'view_type': 'CC-Only-View', # from view-specific experiment results 
         'lesion_type': [lesion],
-        'pr_auc': [eval_metrics['auc']],
+        'pr_auc': [eval_metrics['pr_auc']],
         'sensitivity': [eval_metrics['sensitivity']],
         'precision': [eval_metrics['precision']],
         'specificity': [eval_metrics['specificity']],
         'f1_score': [eval_metrics['f1_score']],
-        'accuracy': [eval_metrics['accuracy']],
         'ece_before_scaling': [ece_before_scaling],
         'ece_after_scaling': [ece_after_scaling],
     })

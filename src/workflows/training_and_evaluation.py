@@ -2,7 +2,7 @@ import tensorflow as tf
 import time
 from src.common_model_functions import compile_model
 from sklearn.metrics import confusion_matrix
-from src.utils import compute_f1_score, compute_specificity
+from src.utils import compute_sensitivity, compute_precision, compute_f1_score, compute_specificity
 
 # Function to compile and train the selected model
 def train_selected_model(model, train_dataset, val_dataset, epochs, earlystopping, class_weight_dict):
@@ -59,21 +59,27 @@ def generate_predictions_and_evaluations(trained_model, dataset, true_labels, cl
     inference_time = prediction_time / num_samples
 
     # Evaluations
-    # Get evaluation metrics (PR-AUC, Recall/Sensitivity, Precision) from the trained model using the given dataset
+    # Get PR-AUC from the trained model using the given dataset
     eval_metrics = trained_model.evaluate(dataset, return_dict=True)
-    # Compute F1 score
-    f1_score = compute_f1_score(eval_metrics['precision'], eval_metrics['recall'])
+
     # Get confusion matrix values
     tn, fp, fn, tp = confusion_matrix(true_labels, predictions).ravel()
+
+    # Compute Sensitivity
+    sensitivity = compute_sensitivity(tp, fn)
+    # Compute Precision
+    precision = compute_precision(tp, fp)
+    # Compute F1 score
+    f1_score = compute_f1_score(precision, sensitivity)
     # Compute Specificity
     specificity = compute_specificity(tn, fp)
 
     # Create an evaluation metrics dictionary containing ALL performance metrics
     eval_metrics_dict = {
         'pr_auc': eval_metrics['auc'],
-        'sensitivity': eval_metrics['recall'],
+        'sensitivity': sensitivity,
         'specificity': specificity,
-        'precision': eval_metrics['precision'],
+        'precision': precision,
         'f1_score': f1_score
     }
 
