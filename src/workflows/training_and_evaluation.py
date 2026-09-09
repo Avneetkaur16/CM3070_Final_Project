@@ -1,6 +1,6 @@
 import tensorflow as tf
 import time
-from src.common_model_functions import compile_model
+from src.common_model_functions import compile_model, fine_tune_compile_model
 from sklearn.metrics import confusion_matrix
 from src.utils import compute_f1_score, compute_specificity
 
@@ -34,6 +34,22 @@ def train_selected_model(model, train_dataset, val_dataset, epochs, earlystoppin
     # Return the trained model
     return model, training_time, peak_memory
 
+# Function to compile and fine-tune the selected model
+def fine_tune_selected_model(model, train_dataset, val_dataset, epochs, earlystopping, class_weight_dict):
+    # Compile the selected model for fine tuning
+    model = fine_tune_compile_model(model)
+
+    # Fit the model with training data, validation data. Use early stopping for early stop and class weight dict for class-imbalance
+    model.fit(
+        train_dataset,
+        validation_data=val_dataset,
+        epochs=epochs,
+        callbacks=[earlystopping],
+        class_weight=class_weight_dict
+    )
+
+    return model
+    
 # Function to get logits, predictions and evaluation metrics from the trained model using test/validation dataset
 def generate_predictions_and_evaluations(trained_model, dataset, true_labels, classification_threshold):
     # Predictions
