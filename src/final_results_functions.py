@@ -40,13 +40,13 @@ def store_final_results(results_file_path, results_df):
     print("Saved final results")
 
 # Function for patient level evaluations of a model for a given dataset
-def patient_level_evaluation_metrics(model, df, dataset, prediction_threshold):
+def patient_level_evaluation_metrics(model, df, dataset, classification_threshold):
     # Compute logits from the dataset
     logits = model.predict(dataset)
     # Calculate probabilities from logits
     probs = tf.nn.sigmoid(logits)
     # Compute predictions from prediction probabilities
-    preds = tf.cast(probs >= prediction_threshold, tf.float32)
+    preds = tf.cast(probs >= classification_threshold, tf.float32)
 
     # Create a copy of the original dataframe
     new_df = df.copy()
@@ -91,4 +91,4 @@ def compute_youdens_index_and_optimal_threshold(prediction_probs, true_labels):
     # Optimal threshold based on max Youden's Index
     optimal_threshold = thresholds[max_j]
 
-    return max_j, optimal_threshold, tpr, fpr
+    return max_j, j, optimal_threshold, thresholds, tpr, fpr

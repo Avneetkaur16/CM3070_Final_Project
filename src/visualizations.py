@@ -29,7 +29,8 @@ def plot_confusion_matrix(true_pathology, predicted_pathology, model_name, exper
 # Receiver Operating Characteristic ROC Curve
 def plot_roc_curve(tpr, fpr):
     plt.figure(figsize=(5, 5))
-    plt.plot(fpr, tpr, label='ROC')
+    plt.plot(fpr, tpr)
+    plt.scatter(fpr, tpr, color="green", marker="o")
     plt.xlabel('False-Positive-Rate')
     plt.ylabel('True-Positive-Rate')
     plt.show()
@@ -37,7 +38,8 @@ def plot_roc_curve(tpr, fpr):
 # Youden's Index 
 def plot_youdens_index(thresholds, j):
     plt.figure(figsize=(5, 5))
-    plt.plot(thresholds, j, label="Youden's Index")
+    plt.plot(thresholds, j)
+    plt.scatter(thresholds, j, color="red", marker="o")
     plt.xlabel('Classification Thresholds')
     plt.ylabel("Youden's Index")
     plt.show()
