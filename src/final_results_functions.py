@@ -18,6 +18,7 @@ def generate_final_results_df(model_name, lesion, eval_metrics, ece_before_scali
         'precision': [eval_metrics['precision']],
         'specificity': [eval_metrics['specificity']],
         'f1_score': [eval_metrics['f1_score']],
+        'accuracy': [eval_metrics['accuracy']],
         'ece_before_scaling': [ece_before_scaling],
         'ece_after_scaling': [ece_after_scaling],
     })

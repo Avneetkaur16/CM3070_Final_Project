@@ -2,7 +2,7 @@ import tensorflow as tf
 import time
 from src.common_model_functions import compile_model
 from sklearn.metrics import confusion_matrix
-from src.utils import compute_sensitivity, compute_precision, compute_f1_score, compute_specificity
+from src.utils import compute_sensitivity, compute_precision, compute_f1_score, compute_specificity, compute_accuracy
 
 # Function to compile and train the selected model
 def train_selected_model(model, train_dataset, val_dataset, epochs, earlystopping, class_weight_dict):
@@ -73,6 +73,8 @@ def generate_predictions_and_evaluations(trained_model, dataset, true_labels, cl
     f1_score = compute_f1_score(precision, sensitivity)
     # Compute Specificity
     specificity = compute_specificity(tn, fp)
+    # Compute Accuracy
+    accuracy = compute_accuracy(tp, tn, fp, fn)
 
     # Create an evaluation metrics dictionary containing ALL performance metrics
     eval_metrics_dict = {
@@ -80,7 +82,8 @@ def generate_predictions_and_evaluations(trained_model, dataset, true_labels, cl
         'sensitivity': sensitivity,
         'specificity': specificity,
         'precision': precision,
-        'f1_score': f1_score
+        'f1_score': f1_score,
+        'accuracy': accuracy
     }
 
     return logits, predictions, eval_metrics_dict, inference_time
