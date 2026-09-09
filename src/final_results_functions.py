@@ -78,9 +78,9 @@ def patient_level_evaluation_metrics(model, df, dataset, prediction_threshold):
     return patient_level_metrics
 
 # Function to compute Youden's Index for validation-set based classification threshold optimization
-def compute_youdens_index_and_optimal_threshold(predictions, true_labels):
-    # Compute false-positive-rates and true-positive-rates for different thresholds using true labels and predictions
-    fpr, tpr, thresholds = roc_curve(true_labels, predictions)
+def compute_youdens_index_and_optimal_threshold(prediction_probs, true_labels):
+    # Compute false-positive-rates and true-positive-rates for different thresholds using true labels and prediction probabilities
+    fpr, tpr, thresholds = roc_curve(true_labels, prediction_probs)
 
     # Youden's Index J = (sensitivity + specificity - 1) OR TPR - FPR (sensitivity - (1 - specificity))
     j = tpr - fpr
