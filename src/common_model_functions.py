@@ -37,18 +37,3 @@ def compile_model(model):
             tf.keras.metrics.Recall(name='recall')
     ])
     return model
-
-# Compiler for fine-tuning
-def fine_tune_compile_model(model):
-    model.compile(
-        # Learning rate = 1e-5
-        optimizer=tf.keras.optimizers.Adam(learning_rate=0.00001),
-        loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
-        metrics=[
-            'accuracy',
-            tf.keras.metrics.AUC(curve='PR', name='auc'),
-            tf.keras.metrics.Precision(name='precision'),
-            tf.keras.metrics.Recall(name='recall')
-        ]
-    )
-    return model
