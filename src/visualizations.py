@@ -48,10 +48,17 @@ def plot_youdens_index(thresholds, j, final_config_name):
 
 # Plot all metrics in a bar graph
 def plot_metrics(metrics, final_config_name):
+    # Metric values from metrics dictionary
+    metric_values = [metrics['pr_auc'], metrics['sensitivity'], metrics['specificity'], 
+                     metrics['precision'], metrics['f1_score'], metrics['accuracy']]
+
+    # Metric names and colors
     metric_names = ['PR-AUC', 'Sensitivity', 'Specificity', 'Precision', 'F1-Score', 'Accuracy']
     metric_colors = ['crimson', 'blueviolet', 'forestgreen', 'lightseagreen', 'tomato']
+
+    # Metrics bar plot
     plt.figure(figsize=(5, 7))
-    ax = plt.bar(x=metric_names, y=metrics, bar_colors=metric_colors)
+    ax = plt.bar(x=metric_names, y=metric_values, bar_colors=metric_colors)
 
     for container in ax.containers:
         container.bar_label(container, fmt='%.2f')
