@@ -29,7 +29,7 @@ def plot_confusion_matrix(true_pathology, predicted_pathology, model_name, exper
 # Receiver Operating Characteristic ROC Curve
 def plot_roc_curve(tpr, fpr, final_config_name):
     plt.figure(figsize=(5, 5))
-    plt.plot(fpr, tpr, label='ROC')
+    plt.plot(fpr, tpr, color="limegreen")
     plt.scatter(fpr, tpr, color="green", marker="o")
     plt.xlabel('False-Positive-Rate')
     plt.ylabel('True-Positive-Rate')
@@ -39,9 +39,26 @@ def plot_roc_curve(tpr, fpr, final_config_name):
 # Youden's Index 
 def plot_youdens_index(thresholds, j, final_config_name):
     plt.figure(figsize=(5, 5))
-    plt.plot(thresholds, j)
-    plt.scatter(thresholds, j, color="red", marker="o")
+    plt.plot(thresholds, j, color="coral")
+    plt.scatter(thresholds, j, color="firebrick", marker="o")
     plt.xlabel('Classification Thresholds')
     plt.ylabel("Youden's Index")
     plt.title(f"Classification Thresholds and Youden's Index for {final_config_name}")
+    plt.show()
+
+# Plot all metrics in a bar graph
+def plot_metrics(metrics, final_config_name):
+    metric_names = ['PR-AUC', 'Sensitivity', 'Specificity', 'Precision', 'F1-Score', 'Accuracy']
+    metric_colors = ['crimson', 'blueviolet', 'forestgreen', 'lightseagreen', 'tomato']
+    plt.figure(figsize=(5, 7))
+    ax = plt.bar(x=metric_names, y=metrics, bar_colors=metric_colors)
+
+    for container in ax.containers:
+        container.bar_label(container, fmt='%.2f')
+
+    plt.xlabel('Metrics')
+    plt.ylabel('Scores')
+    plt.title(f"Metric scores for {final_config_name}")
+    plt.xticks(rotation=0)
+    plt.grid(axis='y', linestyle='--', alpha=0.6)
     plt.show()
