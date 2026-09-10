@@ -58,10 +58,7 @@ def plot_metrics(metrics, final_config_name):
 
     # Metrics bar plot
     plt.figure(figsize=(5, 7))
-    ax = plt.bar(x=metric_names, y=metric_values, bar_colors=metric_colors)
-
-    for container in ax.containers:
-        container.bar_label(container, fmt='%.2f')
+    plt.bar(x=metric_names, y=metric_values, bar_colors=metric_colors)
 
     plt.xlabel('Metrics')
     plt.ylabel('Scores')
