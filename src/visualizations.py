@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import pandas as pd
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 # Function to plot training-validation loss for a given model
@@ -48,17 +49,17 @@ def plot_youdens_index(thresholds, j, final_config_name):
 
 # Plot all metrics in a bar graph
 def plot_metrics(metrics, final_config_name):
-    # Metric values from metrics dictionary
-    metric_values = [metrics['pr_auc'], metrics['sensitivity'], metrics['specificity'], 
-                     metrics['precision'], metrics['f1_score'], metrics['accuracy']]
-
-    # Metric names and colors
-    metric_names = ['PR-AUC', 'Sensitivity', 'Specificity', 'Precision', 'F1-Score', 'Accuracy']
-    metric_colors = ['crimson', 'blueviolet', 'forestgreen', 'lightseagreen', 'tomato']
+    metrics_df = pd.DataFrame({
+        'Metrics': ['PR-AUC', 'Sensitivity', 'Specificity', 'Precision', 'F1-Score', 'Accuracy'],
+        'Scores': [metrics['pr_auc'], metrics['sensitivity'], metrics['specificity'], metrics['precision'], metrics['f1_score'], metrics['accuracy']]
+    })
 
     # Metrics bar plot
     plt.figure(figsize=(5, 7))
-    plt.bar(x=metric_names, y=metric_values, bar_colors=metric_colors)
+    ax = metrics_df.plot(x='Metrics', y='Scores', color=['crimson', 'blueviolet', 'forestgreen', 'lightseagreen', 'tomato'])
+
+    for container in ax.containers:
+        ax.bar_label(container, fmt='%.2f')
 
     plt.xlabel('Metrics')
     plt.ylabel('Scores')
