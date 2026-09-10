@@ -56,7 +56,7 @@ def plot_metrics(metrics, final_config_name):
 
     # Metrics bar plot
     plt.figure(figsize=(10, 6))
-    ax = metrics_df.plot(x='Metrics', y='Scores', kind='bar', color=['crimson', 'blueviolet', 'forestgreen', 'lightseagreen', 'tomato', 'darkorchid'])
+    ax = metrics_df.plot(x='Metrics', y='Scores', kind='bar', color=['crimson', 'navy', 'orange', 'forestgreen', 'firebrick', 'darkorchid'])
 
     for container in ax.containers:
         ax.bar_label(container, fmt='%.2f')
