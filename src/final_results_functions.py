@@ -5,40 +5,6 @@ import os
 from sklearn.metrics import confusion_matrix, roc_curve
 from src.utils import compute_accuracy, compute_f1_score, compute_precision, compute_sensitivity, compute_specificity
 
-# Function to generate results dataframe for final configuration models
-def generate_final_results_df(model_name, lesion, eval_metrics, ece_before_scaling, ece_after_scaling):
-    # Create a result dataframe for the given data
-    result_df = pd.DataFrame({
-        'model': model_name,
-        'image_preprocessing_pipeline': 'Baseline', # from image preprocessing experiment results
-        'view_type': 'CC-Only-View', # from view-specific experiment results 
-        'lesion_type': [lesion],
-        'pr_auc': [eval_metrics['pr_auc']],
-        'sensitivity': [eval_metrics['sensitivity']],
-        'precision': [eval_metrics['precision']],
-        'specificity': [eval_metrics['specificity']],
-        'f1_score': [eval_metrics['f1_score']],
-        'accuracy': [eval_metrics['accuracy']],
-        'ece_before_scaling': [ece_before_scaling],
-        'ece_after_scaling': [ece_after_scaling],
-    })
-    return result_df
-
-# Function to save the final results in the given results file
-def store_final_results(results_file_path, results_df):
-    # If this is the first instance of the results file
-    if not os.path.isfile(results_file_path):
-        final_results = results_df
-    else:
-        # Otherwise, if this is a successive instance of the final results, then read the file and append to it
-        final_results = pd.read_csv(results_file_path)
-        final_results = pd.concat([final_results, results_df], ignore_index=True)
-
-    # Store the final results in the given csv file
-    final_results.to_csv(results_file_path, index=False)
-
-    print("Saved final results")
-
 # Function for patient level evaluations of a model for a given dataset
 def patient_level_evaluation_metrics(model, df, dataset, classification_threshold):
     # Compute logits from the dataset
