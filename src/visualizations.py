@@ -55,8 +55,8 @@ def plot_metrics(metrics, final_config_name):
     })
 
     # Metrics bar plot
-    plt.figure(figsize=(5, 7))
-    ax = metrics_df.plot(x='Metrics', y='Scores', color=['crimson', 'blueviolet', 'forestgreen', 'lightseagreen', 'tomato'])
+    plt.figure(figsize=(10, 6))
+    ax = metrics_df.plot(x='Metrics', y='Scores', kind='bar', color=['crimson', 'blueviolet', 'forestgreen', 'lightseagreen', 'tomato', 'darkorchid'])
 
     for container in ax.containers:
         ax.bar_label(container, fmt='%.2f')
@@ -64,6 +64,27 @@ def plot_metrics(metrics, final_config_name):
     plt.xlabel('Metrics')
     plt.ylabel('Scores')
     plt.title(f"Metric scores for {final_config_name}")
+    plt.xticks(rotation=0)
+    plt.grid(axis='y', linestyle='--', alpha=0.6)
+    plt.show()
+
+# Plot patient-level metrics in a horizontal bar graph
+def plot_patient_level_metrics(metrics, final_config_name):
+    metrics_df = pd.DataFrame({
+        'Metrics': ['Sensitivity', 'Specificity', 'Precision', 'F1-Score', 'Accuracy'],
+        'Scores': [metrics['sensitivity'], metrics['specificity'], metrics['precision'], metrics['f1_score'], metrics['accuracy']]
+    })
+
+    # Metrics bar plot
+    ax = metrics_df.plot(x='Metrics', y='Scores', kind='barh', figsize=(10, 6), 
+                         color=['brown', 'navy', 'limegreen', 'darkorchid', 'orange'])
+
+    for container in ax.containers:
+        ax.bar_label(container, fmt='%.2f')
+
+    plt.xlabel('Metrics')
+    plt.ylabel('Scores')
+    plt.title(f"Patient-Level Metric Scores for {final_config_name}")
     plt.xticks(rotation=0)
     plt.grid(axis='y', linestyle='--', alpha=0.6)
     plt.show()
